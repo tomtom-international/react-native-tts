@@ -102,13 +102,17 @@ export class ReactNativeTts extends RN.NativeEventEmitter {
   stop: (onWordBoundary?: boolean) => Promise<boolean>;
   pause: (onWordBoundary?: boolean) => Promise<boolean>;
   resume: () => Promise<boolean>;
-  addEventListener: <T extends TtsEvents>(
+  addTtsEventListener: <T extends TtsEvents>(
     type: T,
     handler: TtsEventHandler<T>
   ) => void;
-  removeEventListener: <T extends TtsEvents>(
+  removeTtsEventListener: <T extends TtsEvents>(
     type: T,
     handler: TtsEventHandler<T>
+  ) => void;
+  addSingleCallEventListener: <T extends TtsEvents>(
+      type: T,
+      handler: TtsEventHandler<T>
   ) => void;
 }
 

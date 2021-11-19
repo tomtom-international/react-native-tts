@@ -29,13 +29,14 @@ export default class App extends Component<Props> {
 
   constructor(props) {
     super(props);
-    Tts.addEventListener("tts-start", event =>
+    Tts.addTtsEventListener("tts-start", event =>
       this.setState({ ttsStatus: "started" })
     );
-    Tts.addEventListener("tts-finish", event =>
+    Tts.addTtsEventListener("tts-finish", event =>
       this.setState({ ttsStatus: "finished" })
     );
-    Tts.addEventListener("tts-cancel", event =>
+    Tts.addTtsEventListener("tts-cancel", event =>
+    Tts.addTtsEventListener("tts-cancel", event =>
       this.setState({ ttsStatus: "cancelled" })
     );
     Tts.setDefaultRate(this.state.speechRate);
