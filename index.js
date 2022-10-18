@@ -35,6 +35,13 @@ class Tts extends NativeEventEmitter {
     return TextToSpeech.setDucking(enabled);
   }
 
+  setAudioManagement(enabled) {
+    if (Platform.OS === 'windows') {
+      return Promise.resolve(true);
+    }
+    return TextToSpeech.setAudioManagement(enabled);
+  }
+
   setDefaultEngine(engineName) {
     if (Platform.OS === 'ios' || Platform.OS === 'windows') {
       return Promise.resolve(true);
@@ -76,24 +83,18 @@ class Tts extends NativeEventEmitter {
     return TextToSpeech.engines();
   }
 
-  speak(utterance, options = {}) {
-    // compatibility with old-style voiceId argument passing
-    if (typeof options === 'string') {
-      if (Platform.OS === 'ios') {
-        return TextToSpeech.speak(utterance, { iosVoiceId: options });
-      } else {
-        return TextToSpeech.speak(utterance, {});
-      }
-    } else {
-      if (Platform.OS === 'ios' || Platform.OS === 'windows') {
-        return TextToSpeech.speak(utterance, options);
-      } else {
-        return TextToSpeech.speak(utterance, options.androidParams || {});
-      }
+  getHash(utterance) {
+    if (Platform.OS === 'ios') {
+      return Promise.reject(`getHash should not be used on ${Platform.OS}`);
     }
+    return TextToSpeech.getHash(utterance);
   }
 
-  stop(onWordBoundary) {
+  speak(utterance, options) {
+        return TextToSpeech.speak(utterance, options);
+  }
+
+  async stop(onWordBoundary)  {
     if (Platform.OS === 'ios') {
       return TextToSpeech.stop(onWordBoundary);
     } else {

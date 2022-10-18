@@ -60,30 +60,12 @@ export type Engine = {
   icon: number;
 };
 
-export type AndroidOptions = {
-  /** Parameter key to specify the audio stream type to be used when speaking text or playing back a file */
-  KEY_PARAM_STREAM:
-    | "STREAM_VOICE_CALL"
-    | "STREAM_SYSTEM"
-    | "STREAM_RING"
-    | "STREAM_MUSIC"
-    | "STREAM_ALARM"
-    | "STREAM_NOTIFICATION"
-    | "STREAM_DTMF"
-    | "STREAM_ACCESSIBILITY";
-  /** Parameter key to specify the speech volume relative to the current stream type volume used when speaking text. Volume is specified as a float ranging from 0 to 1 where 0 is silence, and 1 is the maximum volume (the default behavior). */
-  KEY_PARAM_VOLUME: number;
-  /** Parameter key to specify how the speech is panned from left to right when speaking text. Pan is specified as a float ranging from -1 to +1 where -1 maps to a hard-left pan, 0 to center (the default behavior), and +1 to hard-right. */
-  KEY_PARAM_PAN: number;
-};
-
-export type Options =
-  | string
-  | {
-      iosVoiceId: string;
-      rate: number;
-      androidParams: AndroidOptions;
-    };
+export type Options = {
+  KEY_OPTION_FORCE_PHONE_SPEAKER?: boolean;
+  KEY_OPTION_CAR_AUDIO_SYSTEM?: boolean;
+  KEY_OPTION_VOLUME?: number;
+  KEY_OPTION_AUDIO_MANAGEMENT?: boolean;
+}
 
 export class ReactNativeTts extends RN.NativeEventEmitter {
   getInitStatus: () => Promise<"success">;
@@ -98,9 +80,10 @@ export class ReactNativeTts extends RN.NativeEventEmitter {
   setIgnoreSilentSwitch: (ignoreSilentSwitch: IOSSilentSwitchBehavior) => Promise<boolean>;
   voices: () => Promise<Voice[]>;
   engines: () => Promise<Engine[]>;
+  getHash: (utterance: string) => string | number;
   /** Read the sentence and return an id for the task. */
   speak: (utterance: string, options?: Options) => string | number;
-  stop: (onWordBoundary?: boolean) => Promise<boolean>;
+  async stop: (onWordBoundary?: boolean) => Promise<boolean>;
   pause: (onWordBoundary?: boolean) => Promise<boolean>;
   resume: () => Promise<boolean>;
   addEventListener: <T extends TtsEvents>(
