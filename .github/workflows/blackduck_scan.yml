@@ -11,7 +11,7 @@ on:
 jobs:
   oss-compliance:
     name: OSS Compliance scan
-    runs-on: staging-2c-8gb
+    runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v3
         with:
