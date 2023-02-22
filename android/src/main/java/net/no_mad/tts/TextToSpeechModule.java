@@ -76,7 +76,7 @@ public class TextToSpeechModule extends ReactContextBaseJavaModule {
     private long audioGainMin = (long) (1.0 * UNITY_GAIN_Q8p24); // 0dB = 1.0 (10 ^ (0/20))
     private long largestSample = 0;
     private AudioTrack audioTrack;
-    private Float volume = 1.0f;
+    private float volume = 1.0f;
 
     private static final boolean enableTestCode = false;
     private int clippedSamplesCount = 0;
