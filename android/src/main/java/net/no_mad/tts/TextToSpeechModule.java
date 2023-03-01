@@ -76,6 +76,7 @@ public class TextToSpeechModule extends ReactContextBaseJavaModule {
     private long audioGainMin = (long) (1.0 * UNITY_GAIN_Q8p24); // 0dB = 1.0 (10 ^ (0/20))
     private long largestSample = 0;
     private AudioTrack audioTrack;
+    private float volume = 1.0f;
 
     private static final boolean enableTestCode = false;
     private int clippedSamplesCount = 0;
@@ -158,6 +159,7 @@ public class TextToSpeechModule extends ReactContextBaseJavaModule {
                             tts.stop();
                         } else {
                             try {
+                                audioTrack.setVolume(volume);
                                 audioTrack.play();
                             } catch (IllegalStateException e) {
                                 tts.stop();
@@ -673,7 +675,7 @@ public class TextToSpeechModule extends ReactContextBaseJavaModule {
     private int speak(String utterance, String utteranceId, ReadableMap options) {
         forcePhoneSpeaker = options.hasKey("KEY_OPTION_FORCE_PHONE_SPEAKER") ? options.getBoolean("KEY_OPTION_FORCE_PHONE_SPEAKER") : false;
         isCarAudioSystem = options.hasKey("KEY_OPTION_CAR_AUDIO_SYSTEM") ? options.getBoolean("KEY_OPTION_CAR_AUDIO_SYSTEM") : false;
-        float volume = options.hasKey("KEY_OPTION_VOLUME") ? (float)options.getDouble("KEY_OPTION_VOLUME") : 1.0f;
+        volume = options.hasKey("KEY_OPTION_VOLUME") ? (float)options.getDouble("KEY_OPTION_VOLUME") : 1.0f;
         float pan = options.hasKey("KEY_OPTION_PAN") ? (float)options.getDouble("KEY_OPTION_PAN") : 0.0f;
 
         requestFocus();
