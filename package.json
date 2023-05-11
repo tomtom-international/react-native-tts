@@ -1,6 +1,6 @@
 {
   "name": "react-native-tts",
-  "version": "v1.4.4-amigo",
+  "version": "v1.4.5-amigo",
   "description": "React Native Text-To-Speech module for Android and iOS",
   "main": "index.js",
   "repository": {
