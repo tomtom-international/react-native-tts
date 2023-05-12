@@ -157,12 +157,9 @@ RCT_EXPORT_METHOD(setDucking:(BOOL *)ducking
     resolve(@"success");
 }
 
-RCT_EXPORT_METHOD(setAudioManagement:(BOOL *)useAudioSession
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(__unused RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(setAudioManagement:(BOOL *)useAudioSession)
 {
     _useAudioSession = useAudioSession;
-    resolve(@"success");
 }
 
 RCT_EXPORT_METHOD(setDefaultLanguage:(NSString *)language

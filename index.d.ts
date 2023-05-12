@@ -69,6 +69,7 @@ export class ReactNativeTts extends RN.NativeEventEmitter {
   getInitStatus: () => Promise<"success">;
   requestInstallEngine: () => Promise<"success">;
   requestInstallData: () => Promise<"success">;
+  setAudioManagement: (enabled: boolean) => void;
   setDucking: (enabled: boolean) => Promise<"success">;
   setDefaultEngine: (engineName: string) => Promise<boolean>;
   setDefaultVoice: (voiceId: string) => Promise<"success">;

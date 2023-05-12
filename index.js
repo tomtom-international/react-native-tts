@@ -37,9 +37,9 @@ class Tts extends NativeEventEmitter {
 
   setAudioManagement(enabled) {
     if (Platform.OS === 'windows') {
-      return Promise.resolve(true);
+      return;
     }
-    return TextToSpeech.setAudioManagement(enabled);
+    TextToSpeech.setAudioManagement(enabled);
   }
 
   setDefaultEngine(engineName) {
