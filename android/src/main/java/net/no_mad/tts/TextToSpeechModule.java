@@ -416,12 +416,7 @@ public class TextToSpeechModule extends ReactContextBaseJavaModule {
 
         try {
             int result = tts.setLanguage(locale);
-            // Google voices support SSML IPA phonetics, so far tested with Android 11, 12.
-            // Further testing with android 10 and lower required to set IPA for more versions.
             String alphabet = "none";
-            if (currentEngineName.contains("com.google.android.tts") && Build.VERSION.SDK_INT >= 30) {
-                alphabet = "ipa";
-            }
             sendPhoneticAlphabetEvent(alphabet);
             resolvePromiseWithStatusCode(result, promise);
         } catch (Exception e) {
